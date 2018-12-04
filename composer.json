@@ -1,5 +1,5 @@
 {
-    "name"  : "workerman/gateway-worker",
+    "name"  : "zhiyuanfirst/gateway-worker",
     "keywords": ["distributed","communication"],
     "homepage": "http://www.workerman.net",
     "license" : "MIT",
