@@ -955,16 +955,22 @@ class Gateway extends Worker
                 $connection->destroy();
                 continue;
             }
+		
+	    	// 持续给客户端发送心跳
+			if ($ping_data) {
+				$connection->send($ping_data, $raw);	
+			}
+				
             // $connection->pingNotResponseCount 为 -1 说明最近客户端有发来消息，则不给客户端发送心跳
-            $connection->pingNotResponseCount++;
-            if ($ping_data) {
-                if ($connection->pingNotResponseCount === 0 ||
-                    ($this->pingNotResponseLimit > 0 && $connection->pingNotResponseCount % 2 === 1)
-                ) {
-                    continue;
-                }
-                $connection->send($ping_data, $raw);
-            }
+//             $connection->pingNotResponseCount++;
+//             if ($ping_data) {
+//                 if ($connection->pingNotResponseCount === 0 ||
+//                     ($this->pingNotResponseLimit > 0 && $connection->pingNotResponseCount % 2 === 1)
+//                 ) {
+//                     continue;
+//                 }
+//                 $connection->send($ping_data, $raw);
+//             }
         }
     }
 
